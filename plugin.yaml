@@ -1,0 +1,26 @@
+apiVersion: extensions.istio.io/v1alpha1
+kind: WasmPlugin
+metadata:
+  name: swimlane-headers-propagate
+  namespace: istio-system
+spec:
+  url: oci://gcr.io/images-374305/swimlane-headers-propagate13:1.19
+  imagePullPolicy: IfNotPresent
+  phase: UNSPECIFIED_PHASE
+  priority: 1000
+  pluginConfig:
+    swimlanes:
+      main:
+        - product-main
+        - reviews-main,details-main
+        - ratings-main
+      alpha:
+        - product-v1
+        - reviews-v2,details-v3
+        - ratings-v1
+      beta:
+        - product-v1
+        - reviews-v3,details-v3
+        - ratings-v3
+#    "header": "x-swimlane-header"
+#    "value": "v1"
